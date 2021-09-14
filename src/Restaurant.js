@@ -1,16 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 
-const Restaurant = () => {
-  const pizzas = 0;
+const Restaurant = props => {
+  const [order, setOrder] = useState(0);
+
+  const incrementOrder = () => {
+    setOrder(order + 1);
+  };
+
   return (
     <div>
       <h3>Restaurant Orders</h3>
       <ul>
-        <li>
-          Pizzas: {pizzas} <button className="btn btn-primary">Add</button>
-        </li>
+        <Order orderType="Pizzas" incrementOrder={incrementOrder} />
+        <Order orderType="Salad" incrementOrder={incrementOrder} />
+        <Order orderType="Meat" incrementOrder={incrementOrder} />
       </ul>
     </div>
+  );
+};
+
+//Restaurant component renders a button with the incrementOrder UseSate function
+const RestaurantButton = props => {
+  return (
+    <button className="btn btn-success" onClick={props.incrementOrder}>
+      Add
+    </button>
+  );
+};
+
+//Seaparate Order component to render useState which adds an additional order
+const Order = props => {
+  const [order, setOrder] = useState(0);
+
+  const incrementOrder = () => {
+    setOrder(order + 1);
+  };
+  return (
+    <li>
+      {" "}
+      {props.orderType}:{order}{" "}
+      <RestaurantButton incrementOrder={incrementOrder} />
+    </li>
   );
 };
 

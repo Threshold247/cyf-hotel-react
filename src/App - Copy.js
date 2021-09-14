@@ -1,6 +1,6 @@
 import React from "react";
+
 import Bookings from "./Bookings";
-import Restaurant from "./Restaurant";
 import "./App.css";
 
 const App = () => {
@@ -9,7 +9,6 @@ const App = () => {
       <Heading />
       <TouristInfoCards />
       <Bookings />
-      <Restaurant />
       <Footer array={array} />
     </div>
   );
@@ -19,24 +18,19 @@ export default App;
 
 const Heading = () => {
   return (
-    <div style={{ textAlign: "center" }}>
+    <div>
       <header className="App-header">CYF Hotel</header>
       <img
         src="https://image.flaticon.com/icons/svg/139/139899.svg"
         alt="hotel"
-        height={420}
       />
     </div>
   );
 };
 
-const touristStyleCard = {
-  color: "blue",
-  textAlign: "center"
-};
 const TouristInfoCards = () => {
   return (
-    <div className="p-2 card-deck rounded-lg shadow ">
+    <div className="row">
       <GlasGow />
       <Manchester />
       <London />
@@ -46,7 +40,7 @@ const TouristInfoCards = () => {
 
 const GlasGow = () => {
   return (
-    <div className="card" style={touristStyleCard}>
+    <div className="card">
       <img
         src="https://peoplemakeglasgow.com/templates/people/helper/timthumb.php?w=200&h=115&src=images/Neighbourhoods/South/Fairfield-Shipyard-Offices--McAteer.jpg"
         alt="Glasgow"
@@ -69,7 +63,7 @@ const GlasGow = () => {
 
 const Manchester = () => {
   return (
-    <div className="card" style={touristStyleCard}>
+    <div className="card">
       <img
         src="https://eu-assets.simpleview-europe.com/manchester2016/imageresizer/?image=%2Fdmsimgs%2FBWH_external_2015_Ben_Blackall_1310760329.jpg&action=ProductDetail"
         alt="Manchester"
@@ -92,7 +86,7 @@ const Manchester = () => {
 
 const London = () => {
   return (
-    <div className="card" style={touristStyleCard}>
+    <div className="card">
       <img
         src="https://cdn.londonandpartners.com/-/media/images/london/visit/things-to-do/sightseeing/london-attractions/london-eye/lastminutelondoneye640x360.jpg?mw=640&hash=369C7DBB3A75160763BFD8572303D124F316A65C"
         alt="London"
@@ -112,7 +106,6 @@ const London = () => {
     </div>
   );
 };
-
 const array = [
   "123 Fake Street, London, E1 4UD",
   "hello@fakehotel.com",
