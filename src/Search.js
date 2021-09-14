@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 const Search = ({ search }) => {
   const [searchInput, setSearchInput] = useState("");
-  const [submit, setSubmit] = useState("");
 
   function handleSearchInput(event) {
     event.preventDefault();
@@ -12,9 +11,10 @@ const Search = ({ search }) => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    setSubmit(search(searchInput));
+    search(searchInput);
   }
-  //props.handleSubmit must be referenced in Bookings component when search function is initailised!!
+
+  //props.handleSubmit must be referenced in Bookings component when search function is initailized!!
   return (
     <div className="search">
       <div className="page-header">
@@ -22,11 +22,7 @@ const Search = ({ search }) => {
       </div>
       <div className="row search-wrapper">
         <div className="col">
-          <form
-            className="form-group search-box"
-            value={submit}
-            onSubmit={handleSubmit}
-          >
+          <form className="form-group search-box" onSubmit={handleSubmit}>
             <label htmlFor="customerName">Customer name</label>
             <div className="search-row">
               <input
