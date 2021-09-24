@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import moment from "moment";
 import CustomerProfile from "./CustomerProfile";
+import Button from "@material-ui/core/Button";
 
-const SearchResults = props => {
+
+const SearchResults = ({bookings}) => {
   const headerArray = [
     "Id",
     "Title",
@@ -15,18 +17,16 @@ const SearchResults = props => {
     "Nights Stayed",
     "Customer Profile"
   ]; //table header
-  const { bookings } = props; //table data
+
 
   //setup color 1 and color 2
   const blank = "";
   const blue = "#03adfc";
   const [colorChg, setColorChg] = useState([]);
 
-  const [state, setState] = useState("");
+  const [profile,setProfile]=useState("Customer Profile")
 
-  function changeNumber() {
-    setState(state + 1);
-  }
+
 
   function handleColorChg(id) {
     //this function sets up useState variable
@@ -39,9 +39,10 @@ const SearchResults = props => {
       setColorChg(colorChg.concat(id));
     }
   }
+
+  //this function works out the difference in days by using Moment.js
+  //specified to work out days by referencing "days" in .diff() method
   function nightStayed(start, end) {
-    //this function works out the difference in days by using Moment.js
-    //specified to work out days by referencing "days" in .diff() method
 
     const startDate = moment(start);
     const endDate = moment(end);
@@ -49,8 +50,16 @@ const SearchResults = props => {
     return DiffInDays;
   }
 
-  const centerMyText = { textAlign: "center" }; //setup a centering variable for style
-  return (
+	const centerMyText = { textAlign: "center" }; //setup a centering variable for style
+
+  const showProfile = (id) => {
+    console.log("Button Clicked",id);
+    const test =(bookings.filter(booking => booking.id ===id));
+    console.log(test);
+    setProfile(test.map(({id,title}) => (`${id},${title}`)));
+	}
+
+return (
     <div style={{ verticalAlign: "middle" }}>
       <table className="table table-striped table-bordered">
         <thead>
@@ -83,6 +92,7 @@ const SearchResults = props => {
                     : { backgroundColor: blank }
                 }
                 onDoubleClick={() => handleColorChg(id)}
+
               >
                 <td style={centerMyText}>{id}</td>
                 <td>{title}</td>
@@ -96,21 +106,20 @@ const SearchResults = props => {
                   {nightStayed(checkOutDate, checkInDate)}
                 </td>
                 <td>
-                  <button
-                    type="button"
-                    className="btn-sm btn-primary"
-                    onClick={changeNumber}
+                  <Button
+                    variant='contained'
+                    color = 'primary'
+                    onClick ={()=> showProfile(id)}
                   >
                     Show Profile
-                  </button>
+                  </Button>
                 </td>
               </tr>
             )
           )}
         </tbody>
       </table>
-      <p>Test</p>
-      <CustomerProfile />
+      <CustomerProfile profile={profile} />
     </div>
   );
 };

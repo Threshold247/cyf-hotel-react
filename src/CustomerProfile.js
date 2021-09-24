@@ -1,10 +1,12 @@
 import React from "react";
 
-const CustomerProfile = props => {
+const CustomerProfile = ({profile}) => {
+	
+				
   return (
-    <div>
-      <p>Customer Profile</p>
-    </div>
+    <>
+      <p>{profile}</p>
+    </>
   );
 };
 
