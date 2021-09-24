@@ -3,8 +3,7 @@ import moment from "moment";
 import CustomerProfile from "./CustomerProfile";
 import Button from "@material-ui/core/Button";
 
-
-const SearchResults = ({bookings}) => {
+const SearchResults = ({ bookings }) => {
   const headerArray = [
     "Id",
     "Title",
@@ -18,15 +17,12 @@ const SearchResults = ({bookings}) => {
     "Customer Profile"
   ]; //table header
 
-
   //setup color 1 and color 2
   const blank = "";
   const blue = "#03adfc";
   const [colorChg, setColorChg] = useState([]);
 
-  const [profile,setProfile]=useState("Customer Profile")
-
-
+  const [profile, setProfile] = useState("Customer Profile");
 
   function handleColorChg(id) {
     //this function sets up useState variable
@@ -43,23 +39,22 @@ const SearchResults = ({bookings}) => {
   //this function works out the difference in days by using Moment.js
   //specified to work out days by referencing "days" in .diff() method
   function nightStayed(start, end) {
-
     const startDate = moment(start);
     const endDate = moment(end);
     const DiffInDays = startDate.diff(endDate, "days");
     return DiffInDays;
   }
 
-	const centerMyText = { textAlign: "center" }; //setup a centering variable for style
+  const centerMyText = { textAlign: "center" }; //setup a centering variable for style
 
-  const showProfile = (id) => {
-    console.log("Button Clicked",id);
-    const test =(bookings.filter(booking => booking.id ===id));
+  const showProfile = id => {
+    console.log("Button Clicked", id);
+    const test = bookings.filter(booking => booking.id === id);
     console.log(test);
-    setProfile(test.map(({id,title}) => (`${id},${title}`)));
-	}
+    setProfile(test.map(({ id, title }) => `${id},${title}`));
+  };
 
-return (
+  return (
     <div style={{ verticalAlign: "middle" }}>
       <table className="table table-striped table-bordered">
         <thead>
@@ -92,7 +87,6 @@ return (
                     : { backgroundColor: blank }
                 }
                 onDoubleClick={() => handleColorChg(id)}
-
               >
                 <td style={centerMyText}>{id}</td>
                 <td>{title}</td>
@@ -107,9 +101,9 @@ return (
                 </td>
                 <td>
                   <Button
-                    variant='contained'
-                    color = 'primary'
-                    onClick ={()=> showProfile(id)}
+                    variant="contained"
+                    color="primary"
+                    onClick={() => showProfile(id)}
                   >
                     Show Profile
                   </Button>

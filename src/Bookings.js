@@ -4,9 +4,8 @@ import SearchResults from "./SearchResults.js";
 //import FakeBookings from "./data/fakeBookings.json";
 
 const Bookings = () => {
-  const search = (searchVal) => {
+  const search = searchVal => {
     console.info(searchVal);
-    
   };
 
   const [bookings, setBookings] = useState([]);
@@ -18,7 +17,6 @@ const Bookings = () => {
         setBookings(data);
       });
   }, []);
-
 
   return (
     <div className="App-content">
